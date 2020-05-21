@@ -1,4 +1,4 @@
-package com.example.easynotes.model;
+package com.mcq.webapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.annotation.CreatedDate;
@@ -9,25 +9,29 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-/**
- * Created by rajeevkumarsingh on 27/06/17.
- */
+ 
 @Entity
-@Table(name = "notes")
+@Table(name = "studentactivities")//,uniqueConstraints=
+//@UniqueConstraint(columnNames = {"teacher"}))
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
-public class Note {
+public class StudentActivitiesModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private String title;
+    @NotBlank //@Column(unique = true)
+    private String fkusername;
 
-    @NotBlank
-    private String content;
+    private int visibility=1;
 
+    private double marks;
+
+    private int fkquestionformatid;
+
+    
+ 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
@@ -46,21 +50,7 @@ public class Note {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
+    
 
     public Date getCreatedAt() {
         return createdAt;
@@ -77,5 +67,44 @@ public class Note {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+ 
+ 
+    public int getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(int visibility) {
+        this.visibility = visibility;
+    }
+
+    public String getFkusername() {
+        return fkusername;
+    }
+
+    public void setFkusername(String fkusername) {
+        this.fkusername = fkusername;
+    }
+
+  
+
+    public int getFkquestionformatid() {
+        return fkquestionformatid;
+    }
+
+    public void setFkquestionformatid(int fkquestionformatid) {
+        this.fkquestionformatid = fkquestionformatid;
+    }
+
+    public double getMarks() {
+        return marks;
+    }
+
+    public void setMarks(double marks) {
+        this.marks = marks;
+    }
+ 
+     
+
+     
 
 }
